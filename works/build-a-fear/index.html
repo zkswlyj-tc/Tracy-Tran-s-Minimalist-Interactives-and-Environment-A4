@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Build-A-Fear</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main id="app" class="app" data-state="idle">
+      <!-- =====================================================
+           GLOBAL ATMOSPHERE
+           ===================================================== -->
+      <div class="grain" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+      <div class="dust-layer" aria-hidden="true"></div>
+
+      <!-- Full-page glitch field -->
+      <div id="globalGlitch" class="global-glitch" aria-hidden="true">
+        <div class="glitch-strip glitch-a"></div>
+        <div class="glitch-strip glitch-b"></div>
+        <div class="glitch-strip glitch-c"></div>
+        <div class="glitch-strip glitch-d"></div>
+      </div>
+
+      <!-- Transition blackout -->
+      <div id="blackoutVeil" class="blackout-veil" aria-hidden="true"></div>
+
+      <!-- =====================================================
+           FINAL FULL-SCREEN TAKEOVER
+           The scary bear first flashes where the teddy is,
+           then glitches and grows beyond the whole UI.
+           ===================================================== -->
+      <section
+        id="finalTakeover"
+        class="final-takeover hidden"
+        aria-hidden="true"
+      >
+        <div class="takeover-static" aria-hidden="true"></div>
+
+        <img
+          id="scaryBear"
+          class="scary-bear"
+          src="./assets/bear_scary.png"
+          alt=""
+          draggable="false"
+        />
+      </section>
+
+      <!-- =====================================================
+           TOP BAR
+           ===================================================== -->
+      <header class="topbar">
+        <div class="project-id">
+          <span>Build-A-Fear</span>
+        </div>
+
+        <div class="top-note">
+          <span id="topStatus">after closing</span>
+        </div>
+      </header>
+
+      <!-- =====================================================
+           MAIN EXPERIENCE
+           ===================================================== -->
+      <section
+        class="experience-shell"
+        aria-label="Build-A-Fear interactive experience"
+      >
+        <!-- ===================================================
+             TEDDY STAGE
+             =================================================== -->
+        <section class="stage-panel" aria-label="Donation box inspection area">
+          <div id="scene" class="scene">
+            <!-- Scene surfaces -->
+            <div class="scene-paper" aria-hidden="true"></div>
+            <div class="scene-frame" aria-hidden="true"></div>
+            <div class="scene-noise" aria-hidden="true"></div>
+            <div class="scene-scanlines" aria-hidden="true"></div>
+            <div class="scene-shadow-field" aria-hidden="true"></div>
+
+            <!-- Track teddy position through JS -->
+            <div id="spotlight" class="spotlight" aria-hidden="true"></div>
+            <div id="teddyAura" class="teddy-aura" aria-hidden="true"></div>
+            <div id="dragShadow" class="drag-shadow" aria-hidden="true"></div>
+
+            <!-- =================================================
+                 DRAGGABLE TEDDY
+                 ================================================= -->
+            <figure
+              id="teddyWrap"
+              class="teddy-wrap"
+              tabindex="0"
+              aria-label="Teddy bear. Drag to move."
+            >
+              <img
+                id="teddy"
+                class="teddy-img"
+                src="./assets/teddy.png"
+                alt="A hand-drawn teddy bear found in a donation box"
+                draggable="false"
+              />
+            </figure>
+
+            <!-- Tiny narrative/status whisper -->
+            <div id="captionBox" class="caption-box" aria-live="polite">
+              <span id="captionText"></span>
+            </div>
+
+            <!-- =================================================
+                 OPENING QUESTION
+                 ================================================= -->
+            <section
+              id="primerScreen"
+              class="overlay primer-screen"
+              aria-label="Opening question"
+            >
+              <div class="overlay-card primer-card">
+                <p class="eyebrow">left outside after closing</p>
+
+                <h1>Do teddy bears normally scare you?</h1>
+
+                <p class="primer-note">
+                  This one was found in the donation box.
+                </p>
+
+                <div class="choice-row">
+                  <button
+                    id="bearYesBtn"
+                    class="text-button answer-button"
+                    type="button"
+                  >
+                    yes
+                  </button>
+
+                  <button
+                    id="bearNoBtn"
+                    class="text-button answer-button"
+                    type="button"
+                  >
+                    no
+                  </button>
+                </div>
+
+                <p id="primerResponse" class="small-response"></p>
+              </div>
+            </section>
+
+            <!-- =================================================
+                 BRIEF ENTRY INTO EXPERIENCE
+                 ================================================= -->
+            <section
+              id="introOverlay"
+              class="overlay intro-overlay hidden"
+              aria-label="Begin inspection"
+            >
+              <div class="overlay-card intro-card">
+                <p class="eyebrow">before it gets sorted away</p>
+
+                <h2>Take a closer look.</h2>
+
+                <p class="intro-note">Move it around. Check what stands out.</p>
+
+                <button
+                  id="beginBtn"
+                  class="text-button primary-button"
+                  type="button"
+                >
+                  begin
+                </button>
+              </div>
+            </section>
+
+            <!-- =================================================
+                 FINAL QUESTION
+                 Returns after the scary takeover.
+                 Not the same as the opener.
+                 ================================================= -->
+            <section
+              id="endingScreen"
+              class="overlay ending-screen hidden"
+              aria-label="Final question"
+            >
+              <div class="overlay-card ending-card">
+                <p class="eyebrow">after the inspection</p>
+
+                <h2>What made this one feel different?</h2>
+
+                <div class="choice-row">
+                  <button
+                    id="leaveYesBtn"
+                    class="text-button ending-choice"
+                    type="button"
+                  >
+                    the teddy
+                  </button>
+
+                  <button
+                    id="leaveNoBtn"
+                    class="text-button ending-choice"
+                    type="button"
+                  >
+                    everything added around it
+                  </button>
+                </div>
+
+                <p id="endingResponse" class="small-response"></p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ===================================================
+             INTERACTION RAIL
+             These feel like inspection findings,
+             but still function as fear-building layers.
+             =================================================== -->
+        <aside class="tool-rail" aria-label="Inspection layers">
+          <button
+            id="lightsBtn"
+            class="tool-button drawn-button"
+            type="button"
+            data-tool="lights"
+            data-label="lower light"
+            aria-label="Lower the light"
+            disabled
+          >
+            <img src="./assets/lights_button.png" alt="" draggable="false" />
+          </button>
+
+          <button
+            id="shadingBtn"
+            class="tool-button drawn-button"
+            type="button"
+            data-tool="shadow"
+            data-label="shadow"
+            aria-label="Add shadow"
+            disabled
+          >
+            <img src="./assets/shading_button.png" alt="" draggable="false" />
+          </button>
+
+          <button
+            id="cutBtn"
+            class="tool-button drawn-button"
+            type="button"
+            data-tool="wound"
+            data-label="tear"
+            aria-label="Reveal tear"
+            disabled
+          >
+            <img src="./assets/cut_button.png" alt="" draggable="false" />
+          </button>
+
+          <button
+            id="lifeBtn"
+            class="tool-button drawn-button"
+            type="button"
+            data-tool="heartbeat"
+            data-label="sound"
+            aria-label="Raise sound"
+            disabled
+          >
+            <img src="./assets/life_button.png" alt="" draggable="false" />
+          </button>
+
+          <button
+            id="captionBtn"
+            class="tool-button drawn-button"
+            type="button"
+            data-tool="voice"
+            data-label="recording"
+            aria-label="Play recording"
+            disabled
+          >
+            <img src="./assets/caption_button.png" alt="" draggable="false" />
+          </button>
+        </aside>
+      </section>
+
+      <!-- =====================================================
+           LOWER BAR
+           ===================================================== -->
+      <footer class="bottombar">
+        <section class="meter-panel" aria-label="Tension meter">
+          <div class="meter-track">
+            <div id="meterFill" class="meter-fill"></div>
+          </div>
+
+          <div class="meter-meta">
+            <span id="meterLabel">unease / 0%</span>
+            <span id="editCount">details / 0</span>
+          </div>
+        </section>
+
+        <section class="status-panel" aria-live="polite">
+          <p id="statusText">...</p>
+        </section>
+
+        <nav class="transport-panel" aria-label="Experience controls">
+          <button
+            id="playBtn"
+            class="transport-button transport-long drawn-button"
+            type="button"
+            aria-label="Begin"
+            disabled
+          >
+            <img src="./assets/play.png" alt="" draggable="false" />
+          </button>
+
+          <button
+            id="soundBtn"
+            class="transport-button sound-toggle drawn-button"
+            type="button"
+            aria-label="Toggle sound"
+          >
+            <img
+              id="soundIcon"
+              src="./assets/sound_on_1.png"
+              alt=""
+              draggable="false"
+            />
+          </button>
+        </nav>
+      </footer>
+
+      <!-- =====================================================
+           AUDIO ASSETS
+           ===================================================== -->
+      <audio id="clickAudio" src="./assets/click.mp3" preload="auto"></audio>
+      <audio id="thudAudio" src="./assets/thud.mp3" preload="auto"></audio>
+      <audio
+        id="scissorsAudio"
+        src="./assets/scissors.mp3"
+        preload="auto"
+      ></audio>
+
+      <audio
+        id="heartAudio"
+        src="./assets/bio_heartbeat.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <audio
+        id="breatheAudio"
+        src="./assets/breathing.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <audio
+        id="clockAudio"
+        src="./assets/clock_ticking.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <audio
+        id="whisperAudio"
+        src="./assets/whisper.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <audio
+        id="creepyBgAudio"
+        src="./assets/creepy_bg.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <audio
+        id="musicBoxAudio"
+        src="./assets/music_box.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <audio
+        id="kidsLaughAudio"
+        src="./assets/kids_laugh.mp3"
+        preload="auto"
+      ></audio>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
