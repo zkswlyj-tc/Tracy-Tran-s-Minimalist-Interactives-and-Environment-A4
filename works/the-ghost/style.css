@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0d0d0f; 
+    color: #e0e0e0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ENTRANCE SCENE */
+#entrance-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: #0d0d0f;
+    transition: opacity 1.5s ease; 
+}
+
+#entrance-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* Typography */
+.title {
+    font-size: 11px;
+    letter-spacing: 0.8em; 
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: #a0a0b0;
+}
+
+.subtitle {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 60px; 
+    color: #80808a;
+    opacity: 0.6;
+}
+
+.project-description {
+    font-size: 10px;
+    line-height: 2.2; 
+    letter-spacing: 0.15em;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #70707a;
+    margin-bottom: 80px;
+    opacity: 0.5;
+}
+
+/*  BUTTON */
+#entry-button {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    opacity: 0.5;
+    padding: 10px;
+}
+
+#entry-button:hover {
+    opacity: 1;
+    letter-spacing: 0.5em;
+    transform: scale(1.5);
+}
+
+/* CANVAS CONTAINER */
+#canvas-container {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    transition: opacity 2s ease;
+    cursor: none; 
+}
+
+/*State management class*/
+.hidden {
+    display: none !important;
+    opacity: 0 !important;
+}
