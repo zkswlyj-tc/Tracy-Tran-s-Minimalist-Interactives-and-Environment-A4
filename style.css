@@ -1,0 +1,1139 @@
+/* =========================================================
+   THE LAPTOP KEPT EVERYTHING
+   style.css
+   8-bit black + red semester laptop housing site
+   ========================================================= */
+
+/* ---------- RESET ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: none;
+}
+
+img {
+  image-rendering: pixelated;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ---------- ROOT THEME ---------- */
+
+:root {
+  --black: #030305;
+  --black-2: #08080b;
+  --black-3: #111116;
+  --black-4: #19191f;
+
+  --red: #a90e34;
+  --red-2: #c81445;
+  --red-3: #ff315f;
+  --red-dark: #4a0619;
+  --red-deep: #24030d;
+
+  --cream: #f1eee5;
+  --paper: #d9d8cf;
+  --gray: #8d8d91;
+  --gray-dark: #34343a;
+
+  --green: #9cffb3;
+
+  --pixel-shadow: #000000;
+  --glow-red: rgba(255, 49, 95, 0.35);
+  --glow-soft: rgba(255, 255, 255, 0.08);
+
+  --font-mono: "Courier New", Courier, monospace;
+}
+
+/* ---------- BODY ---------- */
+
+body {
+  background:
+    radial-gradient(circle at center, #1a1a22 0%, #060607 55%, #000 100%);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  cursor: url("assets/ui/cursor.png"), auto;
+}
+
+/* ---------- GLOBAL PIXEL EFFECTS ---------- */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.035) 0,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.45;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 0, 60, 0.03) 0,
+      rgba(255, 0, 60, 0.03) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+  opacity: 0.55;
+}
+
+/* ---------- MAC-STYLE LOGIN SCREEN ---------- */
+
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 49, 95, 0.25), transparent 28%),
+    radial-gradient(circle at 75% 65%, rgba(169, 14, 52, 0.24), transparent 34%),
+    linear-gradient(135deg, #07070a 0%, #141017 42%, #030305 100%);
+  overflow: hidden;
+}
+
+/* soft pixel scanlines */
+.boot-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.035) 0,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  opacity: 0.45;
+  mix-blend-mode: overlay;
+}
+
+/* red pixel grid */
+.boot-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 49, 95, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 49, 95, 0.04) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.45;
+}
+
+.login-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  color: rgba(241, 238, 229, 0.78);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(3, 3, 5, 0.42);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.65);
+}
+
+.login-card {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  transform: translateY(-10px);
+}
+
+.login-avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter:
+    drop-shadow(8px 8px 0 #000)
+    drop-shadow(0 0 22px rgba(255, 49, 95, 0.35));
+  animation: loginFloat 3.2s steps(4) infinite;
+}
+
+.login-name {
+  margin: 4px 0 0;
+  color: var(--cream);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  text-shadow:
+    2px 2px 0 #000,
+    0 0 12px rgba(255, 49, 95, 0.38);
+}
+
+.login-form {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.login-label {
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.login-input {
+  width: 190px;
+  height: 28px;
+  padding: 4px 34px 4px 12px;
+  background: rgba(241, 238, 229, 0.18);
+  border: 3px solid rgba(0, 0, 0, 0.9);
+  outline: 2px solid rgba(255, 49, 95, 0.45);
+  color: var(--cream);
+  text-align: center;
+  font-size: 0.72rem;
+  box-shadow:
+    5px 5px 0 #000,
+    inset 0 0 12px rgba(255, 49, 95, 0.12);
+}
+
+.login-input::placeholder {
+  color: rgba(241, 238, 229, 0.65);
+  text-transform: lowercase;
+}
+
+.login-input:focus {
+  outline-color: var(--red-3);
+  background: rgba(241, 238, 229, 0.23);
+  box-shadow:
+    5px 5px 0 #000,
+    0 0 20px rgba(255, 49, 95, 0.3);
+}
+
+.login-button {
+  position: absolute;
+  right: -34px;
+  top: 190px;
+  width: 28px;
+  height: 28px;
+  background: var(--red);
+  color: var(--cream);
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  cursor: inherit;
+  font-weight: 900;
+}
+
+.login-button:hover {
+  background: var(--red-3);
+  color: #000;
+}
+
+.login-hint {
+  margin: 8px 0 0;
+  color: rgba(241, 238, 229, 0.62);
+  font-size: 0.68rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.login-cancel {
+  position: absolute;
+  bottom: 36px;
+  z-index: 3;
+  background: transparent;
+  color: rgba(241, 238, 229, 0.7);
+  border: none;
+  font-size: 0.68rem;
+  text-transform: lowercase;
+  cursor: inherit;
+}
+
+.login-cancel::before {
+  content: "◎";
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: var(--cream);
+}
+
+.login-cancel:hover {
+  color: var(--red-3);
+}
+
+@keyframes loginFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms steps(4);
+}
+
+/* ---------- LAPTOP STAGE ---------- */
+
+
+/* ---------- SCREEN ---------- */
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 49, 95, 0.13), transparent 28%),
+    radial-gradient(circle at 75% 70%, rgba(169, 14, 52, 0.13), transparent 30%),
+    linear-gradient(135deg, #121217 0%, #08080b 55%, #050506 100%);
+}
+
+.screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.55;
+}
+
+/* red ghost vignette */
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.92);
+}
+
+
+
+/* ---------- DESKTOP ---------- */
+
+/* ---------- DESKTOP ---------- */
+
+.desktop {
+  position: absolute;
+  z-index: 2;
+  inset: 28px 0 40px 0;
+  padding: 28px;
+  display: block;
+}
+
+.desktop-icon {
+  position: absolute;
+  width: 112px;
+  min-height: 120px;
+  padding: 7px 5px;
+  background: transparent;
+  color: var(--cream);
+  border: 3px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  text-align: center;
+  cursor: grab;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+.desktop-icon.dragging {
+  cursor: grabbing;
+  opacity: 0.85;
+  z-index: 25;
+}
+
+.desktop-icon:hover,
+.desktop-icon:focus-visible {
+  outline: none;
+  border-color: var(--red-3);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 49, 95, 0.22),
+      rgba(74, 6, 25, 0.2)
+    );
+  box-shadow:
+    inset 0 0 0 3px rgba(0, 0, 0, 0.65),
+    5px 5px 0 #000;
+}
+
+.desktop-icon:active {
+  transform: none;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.desktop-icon.locked {
+  filter: grayscale(0.25) brightness(0.72);
+}
+
+.desktop-icon img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  filter:
+    drop-shadow(5px 5px 0 #000)
+    drop-shadow(0 0 8px rgba(255, 49, 95, 0.12));
+}
+
+.desktop-icon span {
+  display: block;
+  max-width: 108px;
+  color: var(--cream);
+  font-size: 0.7rem;
+  line-height: 1.15;
+  text-shadow:
+    2px 2px 0 #000,
+    0 0 8px rgba(0, 0, 0, 0.9);
+  word-break: break-word;
+}
+
+/* ---------- TASKBAR ---------- */
+
+/* ---------- BOTTOM DOCK / TASKBAR ---------- */
+
+.taskbar {
+  position: absolute;
+  z-index: 60;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  min-width: 280px;
+  height: 42px;
+  padding: 0 18px;
+  background: rgba(5, 5, 6, 0.72);
+  border: 3px solid #000;
+  box-shadow:
+    6px 6px 0 #000,
+    0 0 22px rgba(255, 49, 95, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.taskbar-left span {
+  color: rgba(241, 238, 229, 0.82);
+}
+
+
+
+/* ---------- WINDOWS LAYER ---------- */
+
+.windows-layer {
+  position: absolute;
+  z-index: 30;
+  inset: 42px 0 40px 0;
+  pointer-events: none;
+}
+
+/* JS will create windows inside here; windows themselves need pointer events */
+.window {
+  position: absolute;
+  width: min(680px, 82vw);
+  min-height: 340px;
+  max-height: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  background: var(--black-3);
+  border: 5px solid #000;
+  box-shadow:
+    12px 12px 0 rgba(0, 0, 0, 0.82),
+    0 0 0 3px rgba(255, 49, 95, 0.18);
+  pointer-events: auto;
+  color: var(--cream);
+}
+
+.window::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.025) 0,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.window-header {
+  height: 40px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(to bottom, var(--red-3), var(--red), var(--red-dark));
+  border-bottom: 5px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 12px;
+  cursor: move;
+  position: relative;
+  z-index: 2;
+}
+
+.window-title {
+  margin: 0;
+  font-size: 0.82rem;
+  color: white;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #000;
+  max-width: calc(100% - 90px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-controls {
+  display: flex;
+  height: 100%;
+}
+
+.window-controls button {
+  width: 40px;
+  height: 100%;
+  color: white;
+  background: var(--black-3);
+  border-left: 5px solid #000;
+  cursor: inherit;
+  font-weight: 900;
+}
+
+.window-controls button:hover {
+  background: var(--red-3);
+  color: #000;
+}
+
+.window-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 100% 100%, rgba(169, 14, 52, 0.16), transparent 38%),
+    #111116;
+}
+
+/* scrollbar */
+.window-body::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+.window-body::-webkit-scrollbar-track {
+  background: #050506;
+  border-left: 3px solid #000;
+}
+
+.window-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 100% 100%, rgba(169, 14, 52, 0.16), transparent 38%),
+    #111116;
+}
+
+.window-body::-webkit-scrollbar-thumb:hover {
+  background: var(--red-3);
+}
+
+/* fullscreen state JS can toggle */
+.window.fullscreen,
+.window.full {
+  left: 14px !important;
+  top: 14px !important;
+  width: calc(100% - 28px) !important;
+  height: calc(100% - 28px) !important;
+  max-height: none;
+  resize: none;
+}
+.window {
+  resize: both;
+  overflow: hidden;
+  min-width: 360px;
+  min-height: 260px;
+}
+
+.window {
+  position: absolute;
+  width: min(680px, 82vw);
+  height: auto;
+  min-width: 360px;
+  min-height: 260px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  resize: both;
+  overflow: hidden;
+  background: var(--black-3);
+  border: 5px solid #000;
+  box-shadow:
+    12px 12px 0 rgba(0, 0, 0, 0.82),
+    0 0 0 3px rgba(255, 49, 95, 0.18);
+  pointer-events: auto;
+  color: var(--cream);
+}
+/* ---------- FOLDER GRID INSIDE WINDOWS ---------- */
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 18px;
+}
+
+.file-item {
+  min-height: 118px;
+  padding: 10px 6px;
+  background: transparent;
+  border: 3px solid transparent;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: inherit;
+}
+
+.file-item:hover,
+.file-item:focus-visible {
+  outline: none;
+  border-color: var(--red-3);
+  background: rgba(255, 49, 95, 0.15);
+  box-shadow: 5px 5px 0 #000;
+}
+
+.file-item:active {
+  transform: translate(2px, 2px);
+}
+
+.file-item img,
+.file-icon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(5px 5px 0 #000);
+}
+
+.file-label,
+.file-item span {
+  margin-top: 8px;
+  max-width: 110px;
+  color: var(--cream);
+  font-size: 0.7rem;
+  line-height: 1.15;
+  text-align: center;
+  word-break: break-word;
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* ---------- TEXT FILES ---------- */
+
+.text-file {
+  max-width: 860px;
+  color: var(--cream);
+  line-height: 1.7;
+  font-size: 0.92rem;
+}
+
+.text-file h2 {
+  margin: 0 0 18px;
+  color: var(--red-3);
+  font-size: 1.25rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-shadow:
+    3px 3px 0 #000,
+    0 0 12px var(--glow-red);
+}
+
+.text-file p {
+  margin: 0 0 16px;
+}
+
+.text-file strong {
+  color: var(--red-3);
+}
+
+.text-file ul {
+  margin: 12px 0 18px;
+  padding-left: 26px;
+}
+
+.text-file li {
+  margin-bottom: 8px;
+}
+
+.system-line {
+  margin-top: 22px;
+  padding: 12px;
+  border: 4px solid #000;
+  background: var(--red-deep);
+  color: var(--red-3);
+  box-shadow: inset 0 0 0 3px rgba(255, 49, 95, 0.2);
+}
+
+.key-found {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: #050506;
+  border: 4px solid var(--red-3);
+  color: var(--red-3);
+  box-shadow:
+    5px 5px 0 #000,
+    0 0 14px rgba(255, 49, 95, 0.22);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+/* ---------- PASSWORD FORM ---------- */
+
+.password-form {
+  display: grid;
+  gap: 16px;
+  max-width: 460px;
+}
+
+.password-question {
+  margin: 0;
+  color: var(--cream);
+  line-height: 1.6;
+}
+
+.password-label {
+  display: grid;
+  gap: 8px;
+  color: var(--red-3);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.password-input {
+  width: 100%;
+  padding: 12px;
+  background: #030305;
+  color: var(--green);
+  border: 4px solid #000;
+  outline: 3px solid var(--red);
+  text-transform: uppercase;
+  caret-color: var(--green);
+}
+
+.password-input:focus {
+  outline-color: var(--red-3);
+  box-shadow: 0 0 14px var(--glow-red);
+}
+
+.password-submit {
+  justify-self: start;
+  padding: 12px 18px;
+  background: var(--red);
+  color: white;
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  cursor: inherit;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.password-submit:hover {
+  background: var(--red-3);
+  color: #000;
+}
+
+.password-error {
+  min-height: 24px;
+  margin: 0;
+  color: var(--red-3);
+  text-shadow: 0 0 10px var(--glow-red);
+}
+
+.password-hint {
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ---------- WORK IFRAME ---------- */
+
+.work-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  display: block;
+  border: none;
+  background: #000;
+}
+
+.window:has(.work-frame) {
+  width: calc(100% - 38px);
+  height: calc(100% - 38px);
+  left: 19px !important;
+  top: 19px !important;
+}
+
+.window:has(.work-frame) .window-body {
+  padding: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+/* ---------- IMAGE FILE DISPLAY ---------- */
+
+.image-preview {
+  max-width: 100%;
+  height: auto;
+  border: 5px solid #000;
+  box-shadow: 8px 8px 0 #000;
+  image-rendering: auto;
+}
+
+/* ---------- SECRET / UNLOCKED STATES ---------- */
+
+body.a2-unlocked .screen,
+body.state-a2 .screen {
+  background:
+    radial-gradient(circle at 20% 22%, rgba(255, 49, 95, 0.14), transparent 26%),
+    radial-gradient(circle at 70% 48%, rgba(180, 10, 52, 0.2), transparent 34%),
+    linear-gradient(135deg, #121217 0%, #08080b 55%, #050506 100%);
+}
+
+body.a3-unlocked .screen,
+body.state-a3 .screen {
+  animation: laptopGlitch 5s steps(2) infinite;
+}
+
+@keyframes laptopGlitch {
+  0%,
+  91%,
+  100% {
+    filter: none;
+  }
+
+  92% {
+    filter: contrast(1.18) brightness(0.82);
+  }
+
+  93% {
+    filter: hue-rotate(-14deg) contrast(1.35);
+  }
+
+  94% {
+    filter: none;
+  }
+}
+
+/* optional scar dots JS can create */
+.desktop-scar,
+.scar-pixel {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: var(--red-3);
+  pointer-events: none;
+  z-index: 3;
+  box-shadow: 0 0 10px var(--glow-red);
+}
+/* ---------- FULLSCREEN LAPTOP DESKTOP ---------- */
+
+.laptop-stage {
+  position: fixed;
+  inset: 0;
+  display: block;
+  padding: 0;
+  background: #000;
+}
+
+.laptop-frame {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  box-shadow: none;
+  background: #000;
+}
+
+.laptop-frame::after {
+  display: none;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 49, 95, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 78%, rgba(169, 14, 52, 0.2), transparent 34%),
+    linear-gradient(135deg, #0a080d 0%, #130711 46%, #030305 100%);
+}
+
+.screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 49, 95, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 49, 95, 0.035) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.55;
+}
+
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.86);
+}
+
+/* ---------- MAC-LIKE TOP MENU BAR ---------- */
+
+.top-bar {
+  position: relative;
+  z-index: 60;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: rgba(3, 3, 5, 0.78);
+  border-bottom: 3px solid #000;
+  backdrop-filter: blur(6px);
+  color: var(--cream);
+  font-size: 0.68rem;
+  letter-spacing: 0.5px;
+  text-transform: none;
+}
+
+.menu-left,
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menu-left span,
+.menu-right span {
+  text-shadow: 2px 2px 0 #000;
+  white-space: nowrap;
+}
+
+.apple-dot {
+  color: var(--red-3);
+  text-shadow:
+    0 0 10px rgba(255, 49, 95, 0.6),
+    2px 2px 0 #000;
+}
+
+#system-status {
+  color: rgba(241, 238, 229, 0.68);
+}
+
+#system-clock {
+  color: var(--cream);
+}
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 860px) {
+  .laptop-stage {
+    padding: 0;
+  }
+
+  .laptop-frame {
+    width: 100vw;
+    height: 100vh;
+    border-width: 6px;
+    box-shadow: none;
+  }
+
+  .laptop-frame::after {
+    display: none;
+  }
+
+  .top-bar {
+    height: 38px;
+    font-size: 0.62rem;
+  }
+
+  .desktop {
+    inset: 38px 0 40px 0;
+    grid-template-columns: repeat(auto-fill, 96px);
+    grid-auto-rows: 112px;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .desktop-icon {
+    width: 96px;
+    min-height: 104px;
+  }
+
+  .desktop-icon img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .desktop-icon span,
+  .file-item span,
+  .file-label {
+    font-size: 0.62rem;
+  }
+
+  .window {
+    width: calc(100% - 28px);
+    left: 14px !important;
+    top: 52px !important;
+    min-height: 300px;
+  }
+
+  .folder-grid {
+    grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+    gap: 12px;
+  }
+
+  .taskbar {
+    font-size: 0.58rem;
+    gap: 10px;
+  }
+
+  .taskbar-progress {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 520px) {
+  .top-right {
+    display: none;
+  }
+
+  .taskbar-left {
+    display: none;
+  }
+
+  .taskbar {
+    justify-content: center;
+  }
+
+  .boot-window {
+    padding: 22px;
+  }
+
+  .boot-title {
+    letter-spacing: 2px;
+  }
+}
+.image-file-view h2 {
+  margin: 0 0 16px;
+  color: var(--red-3);
+  text-transform: lowercase;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.photo-slot {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.photo-slot img {
+  width: 100%;
+  max-height: 560px;
+  object-fit: contain;
+  background: #050506;
+  border: 5px solid #000;
+  box-shadow:
+    8px 8px 0 #000,
+    0 0 20px rgba(255, 49, 95, 0.16);
+  image-rendering: auto;
+}
+
+.photo-slot figcaption {
+  padding: 12px 14px;
+  background: rgba(5, 5, 6, 0.78);
+  border-left: 4px solid var(--red-3);
+  color: rgba(241, 238, 229, 0.82);
+  line-height: 1.5;
+  font-size: 0.82rem;
+}
+.desktop-icon.available-next {
+  animation: availablePulse 0.35s steps(2) 5;
+}
+
+@keyframes availablePulse {
+  0% {
+    filter: brightness(1);
+  }
+
+  100% {
+    filter:
+      brightness(1.5)
+      drop-shadow(0 0 14px rgba(255, 49, 95, 0.7));
+  }
+}

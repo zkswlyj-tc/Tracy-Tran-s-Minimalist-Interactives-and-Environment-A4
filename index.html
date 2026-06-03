@@ -1,0 +1,2144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TRACY'S SEMESTER laptop</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- LOGIN SCREEN -->
+    <section id="boot-screen" class="boot-screen">
+      <div class="login-card">
+        <img
+          class="login-avatar"
+          src="assets/icons/profile.png"
+          alt="Pixel profile icon"
+        />
+
+        <h1 class="login-name">tracy</h1>
+
+        <form id="login-form" class="login-form">
+          <label for="login-password" class="login-label">
+            enter semester laptop
+          </label>
+
+          <div class="login-input-row">
+            <input
+              id="login-password"
+              class="login-input"
+              type="password"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder=""
+            />
+
+            <button id="boot-button" class="login-button" type="submit">
+              →
+            </button>
+          </div>
+
+          <p class="login-hint">press enter to enter the semester</p>
+        </form>
+      </div>
+
+      <button class="login-cancel" type="button">cancel</button>
+    </section>
+
+    <!-- LAPTOP / DESKTOP -->
+    <main id="laptop-stage" class="laptop-stage">
+      <section class="laptop-frame">
+        <section id="screen" class="screen">
+          <!-- NORMAL LAPTOP TOP BAR -->
+          <header class="top-bar">
+            <div class="menu-left">
+              <span class="apple-dot">●</span>
+              <span>Finder</span>
+              <span>File</span>
+              <span>Edit</span>
+              <span>View</span>
+              <span>Go</span>
+              <span>Window</span>
+              <span>Help</span>
+            </div>
+
+            <div class="menu-right">
+              <span id="system-status">SEMESTER_OS / READY</span>
+              <span id="system-clock">4:15</span>
+            </div>
+          </header>
+
+          <!-- DESKTOP ICONS -->
+          <section id="desktop" class="desktop">
+            <button
+              class="desktop-icon"
+              data-type="txt"
+              data-file="README_FIRST"
+              aria-label="Open README first"
+            >
+              <img src="assets/icons/txt-file.png" alt="" />
+              <span>README_FIRST.txt</span>
+            </button>
+
+            <button
+              class="desktop-icon"
+              data-type="folder"
+              data-folder="A1_THE_GHOST"
+              aria-label="Open A1 The Ghost folder"
+            >
+              <img src="assets/icons/folder.png" alt="" />
+              <span>A1_THE_GHOST</span>
+            </button>
+
+            <button
+              class="desktop-icon locked"
+              data-type="locked-folder"
+              data-folder="A2_TRACE_TETHER"
+              data-password="SCAR"
+              aria-label="A2 Trace and Tether folder locked"
+            >
+              <img src="assets/icons/locked-folder.png" alt="" />
+              <span>A2_TRACE_TETHER</span>
+            </button>
+
+            <button
+              class="desktop-icon locked"
+              data-type="locked-folder"
+              data-folder="A3_BUILD_A_FEAR"
+              data-password="TETHER"
+              aria-label="A3 Build A Fear folder locked"
+            >
+              <img src="assets/icons/locked-folder.png" alt="" />
+              <span>A3_BUILD_A_FEAR</span>
+            </button>
+
+            <button
+              class="desktop-icon locked"
+              data-type="locked-folder"
+              data-folder="FINAL_SYSTEM_REPORT"
+              data-password="SUSPICION"
+              aria-label="Final system report folder locked"
+            >
+              <img src="assets/icons/locked-folder.png" alt="" />
+              <span>FINAL_SYSTEM_REPORT</span>
+            </button>
+
+            <button
+              class="desktop-icon"
+              data-type="folder"
+              data-folder="DOCUMENTATION_PDFS"
+              aria-label="Open documentation PDFs folder"
+            >
+              <img src="assets/icons/folder.png" alt="" />
+              <span>DOCUMENTATION_PDFS</span>
+            </button>
+
+            <button
+              class="desktop-icon"
+              data-type="trash"
+              data-file="TRASH"
+              aria-label="Open trash"
+            >
+              <img src="assets/icons/trash-file.png" alt="" />
+              <span>TRASH</span>
+            </button>
+          </section>
+
+          <footer class="taskbar">
+            <div class="taskbar-left">
+              <span>MINIMAL INTERACTIVES / SEMESTER LAPTOP</span>
+            </div>
+          </footer>
+
+          <section
+            id="windows-layer"
+            class="windows-layer"
+            aria-live="polite"
+          ></section>
+        </section>
+      </section>
+    </main>
+
+    <!-- WINDOW TEMPLATES -->
+    <template id="window-template">
+      <article class="window">
+        <header class="window-header">
+          <h2 class="window-title">Untitled Window</h2>
+
+          <div class="window-controls">
+            <button class="window-fullscreen" aria-label="Fullscreen window">
+              □
+            </button>
+            <button class="window-close" aria-label="Close window">×</button>
+          </div>
+        </header>
+
+        <div class="window-body"></div>
+      </article>
+    </template>
+
+    <template id="folder-template">
+      <div class="folder-grid"></div>
+    </template>
+
+    <template id="file-item-template">
+      <button class="file-item">
+        <img class="file-icon" src="" alt="" />
+        <span class="file-label"></span>
+      </button>
+    </template>
+
+    <template id="password-template">
+      <form class="password-form">
+        <p class="password-question"></p>
+
+        <label class="password-label">
+          ENTER KEY
+          <input
+            class="password-input"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </label>
+
+        <button class="password-submit" type="submit">UNLOCK</button>
+
+        <p class="password-error" aria-live="polite"></p>
+
+        <small class="password-hint">
+          hint: the key is hidden in the previous reflection file. yes, the
+          laptop is being dramatic.
+        </small>
+      </form>
+    </template>
+
+    <template id="work-frame-template">
+      <iframe
+        class="work-frame"
+        src=""
+        title=""
+        loading="lazy"
+        allow="autoplay; fullscreen"
+      ></iframe>
+    </template>
+
+    <!-- README -->
+    <template id="file-README_FIRST">
+      <article class="text-file">
+        <h2>README_FIRST.txt</h2>
+
+        <p>okay so this is supposed to be the “start here” file.</p>
+
+        <p>
+          i made the housing site as a laptop because that is honestly where the
+          semester feels like it happened. not in a clean portfolio space. more
+          like inside random folders, renamed files, broken code, half-working
+          drafts, and the same project being opened again and again because
+          something still felt off.
+        </p>
+
+        <p>
+          i wish i could say everything developed in a neat order, but it really
+          did not. most of the time i would fix one thing, feel good for about
+          three seconds, then realise another part had stopped working or the
+          interaction technically worked but felt completely wrong.
+        </p>
+
+        <p>
+          the annoying thing with interactive work is that “working” is not
+          always enough sadly D:
+        </p>
+
+        <p>
+          also, small confession: i do not really keep screenshots properly
+          while building. i usually just update the file, replace the version,
+          fix the bug, and move on before remembering that i should probably
+          save evidence of the messy middle. so the proper process images are in
+          the documentation PDFs. this laptop is more for the thoughts behind
+          the finished documentation.
+        </p>
+
+        <p>
+          the folders are locked in order because each project left me with one
+          word that became useful for the next one. it is a bit dramatic, but it
+          fits the way the semester felt. one work would finally make sense,
+          then immediately become the problem i had to carry into the next work.
+        </p>
+
+        <p>
+          start with <strong>A1_THE_GHOST</strong>. read the notes, run the
+          work, find the key, then use it to open the next folder.
+        </p>
+
+        <p class="system-line">
+          basically: click around and read the stuff i went through over this
+          semester
+        </p>
+      </article>
+    </template>
+
+    <template id="file-TRASH">
+      <article class="text-file">
+        <h2>TRASH</h2>
+
+        <p>
+          i kept this folder because it feels wrong for a semester laptop to
+          look too clean.
+        </p>
+
+        <p>
+          there were so many little things that disappeared while i was working:
+          versions of webs i overwrote, screenshots in god-knows-which-folders,
+          ideas that sounded good until i actually tried building them, layouts
+          that looked fine for five minutes and then suddenly became ugly.
+        </p>
+
+        <p>
+          most of them are not here anymore because i am very much the kind of
+          person who fixes something directly in the file and then realises
+          later that the messy middle stage is gone. tragic.
+        </p>
+
+        <p>
+          but i still wanted a trash folder here because the deleted parts
+          shaped my final works too, a lot more than i'd like to admit.
+        </p>
+
+        <p>
+          so this is more of a small apology to all the versions i replaced
+          before remembering to document them properly.
+        </p>
+
+        <p class="system-line">
+          gone from the desktop, but not gone from my memory, (un)fortunately.
+        </p>
+      </article>
+    </template>
+
+    <!-- A1 FOLDER CONTENT -->
+    <template id="folder-A1_THE_GHOST">
+      <button class="file-item" data-type="txt" data-file="A1_START">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>00_open_this_first.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A1_ANNOYED">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>01_the_screen_was_too_clean.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A1_BROKE">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>02_it_kept_healing.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A1_REFERENCES">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>03_references_that_stuck.txt</span>
+      </button>
+
+      <button class="file-item" data-type="key" data-file="A1_KEY">
+        <img src="assets/icons/key-file.png" alt="" />
+        <span>04_the_word_it_left.key</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="THE_GHOST"
+        data-src="works/the-ghost/index.html"
+      >
+        <img src="assets/icons/exe-file.png" alt="" />
+        <span>RUN_THE_GHOST.exe</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A1_NEXT">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>05_next.txt</span>
+      </button>
+    </template>
+
+    <template id="file-A1_START">
+      <article class="text-file">
+        <h2>00_open_this_first.txt</h2>
+
+        <p>
+          THE GHOST was the first project where i stopped treating interaction
+          like a friendly service.
+        </p>
+
+        <p>
+          before this, i still had the instinct to make the screen feel smooth:
+          cursor moves, system reacts, everything resets nicely. very clean.
+          very polite. also kind of boring.
+        </p>
+
+        <p>
+          i wanted the user to feel less like a guest and more like a
+          disturbance. not evil, not powerful, just present in a way the system
+          cannot fully erase.
+        </p>
+
+        <p>
+          the project became a quiet grid that the cursor damages by moving
+          through it. the user does not do much, but that was the point. even a
+          small action can leave proof.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A1_ANNOYED">
+      <article class="text-file">
+        <h2>01_the_screen_was_too_clean.txt</h2>
+
+        <p>
+          what bothered me was how digital spaces always "forgive" the user too
+          fast. refresh the page and everything is clean again. undo the action
+          and the system acts like nothing happened.
+        </p>
+
+        <p>
+          real spaces are not like that. a chair remembers weight. fabric
+          creases. grass bends. even a room feels different after someone has
+          been inside it for a while.
+        </p>
+
+        <p>
+          so i kept asking: what would it mean for a digital surface to remember
+          being ""touched"?
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A1_BROKE">
+      <article class="text-file">
+        <h2>02_it_kept_healing.txt</h2>
+
+        <p>
+          the annoying part was that the early versions looked fine but felt
+          wrong.
+        </p>
+
+        <p>
+          particles moved away from the cursor. the grid responded. the code was
+          doing what i asked. but emotionally it was giving nothing, because the
+          system kept recovering too fast.
+        </p>
+
+        <p>
+          i spent a lot of time adjusting tiny values: how much the cursor
+          pushes, how quickly particles return, how long trails stay, how broken
+          a broken state should look. small numbers changed the whole feeling of
+          the work.
+        </p>
+
+        <p>
+          eventually i let the grid stay bruised. that was when the project
+          finally stopped looking like a visual effect and started feeling like
+          a system with a memory.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A1_REFERENCES">
+      <article class="text-file">
+        <h2>03_references_that_stuck.txt</h2>
+
+        <p>
+          Kenya Hara’s idea of <strong>Ma</strong> helped me stop seeing the
+          blank screen as empty. it made me think of space as something charged,
+          waiting, and sensitive.
+        </p>
+
+        <p>
+          Casey Reas helped with the behaviour of the system. i liked how simple
+          rules could make something feel alive without making the work visually
+          crowded.
+        </p>
+
+        <p>
+          Mona Hatoum’s <em>+ and -</em> stayed with me because it made creation
+          and erasure feel connected. one mark appears, another disappears.
+          nothing is neutral.
+        </p>
+
+        <p>
+          those references did not give me a style to copy. they gave me
+          permission to make the screen quiet but not passive.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A1_KEY">
+      <article class="text-file">
+        <h2>04_the_word_it_left.key</h2>
+
+        <p>THE GHOST changed how i understood minimalism.</p>
+
+        <p>
+          it was not enough for the work to be visually simple. the simplicity
+          had to put pressure on the action. with fewer things on screen, the
+          user’s movement became harder to ignore.
+        </p>
+
+        <p>
+          the interface stopped being a clean surface and started holding the
+          trace of what happened to it.
+        </p>
+
+        <p>the first word this laptop keeps is the mark left after contact.</p>
+
+        <p class="key-found">KEY FOUND: SCAR</p>
+      </article>
+    </template>
+
+    <template id="file-A1_NEXT">
+      <article class="text-file">
+        <h2>05_next.txt</h2>
+
+        <p>use the key to open A2_TRACE_TETHER.</p>
+
+        <p>
+          the next project is less about damage on a system and more about what
+          gets pulled out of memory.
+        </p>
+      </article>
+    </template>
+
+    <!-- A2 FOLDER CONTENT -->
+    <template id="folder-A2_TRACE_TETHER">
+      <button class="file-item" data-type="txt" data-file="A2_START">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>00_after_the_ghost.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_BUTTON">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>01_it_was_about_a_button_somehow.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_DRAG">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>02_dragging_felt_fake.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_SYSTEM">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>03_thread_poem_sound.txt</span>
+      </button>
+
+      <button class="file-item" data-type="key" data-file="A2_KEY">
+        <img src="assets/icons/key-file.png" alt="" />
+        <span>04_the_word_it_left.key</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="TRACE_TETHER"
+        data-src="works/trace-tether/index.html"
+      >
+        <img src="assets/icons/exe-file.png" alt="" />
+        <span>RUN_TRACE_TETHER.exe</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_NEXT">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>05_next.txt</span>
+      </button>
+    </template>
+
+    <!-- A2 FOLDER CONTENT -->
+    <template id="folder-A2_TRACE_TETHER">
+      <button class="file-item" data-type="txt" data-file="A2_START">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>00_after_the_ghost.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_BUTTON">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>01_it_was_about_a_button_somehow.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_DRAG">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>02_dragging_was_personal_beef.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_SYSTEM">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>03_thread_poem_sound_all_fighting.txt</span>
+      </button>
+
+      <button class="file-item" data-type="key" data-file="A2_KEY">
+        <img src="assets/icons/key-file.png" alt="" />
+        <span>04_the_word_it_left.key</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="TRACE_TETHER"
+        data-src="works/trace-tether/index.html"
+      >
+        <img src="assets/icons/exe-file.png" alt="" />
+        <span>RUN_TRACE_TETHER.exe</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A2_NEXT">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>05_next.txt</span>
+      </button>
+    </template>
+
+    <template id="file-A2_START">
+      <article class="text-file">
+        <h2>00_after_the_ghost.txt</h2>
+
+        <p>
+          after THE GHOST, i did not want to just make another thing that gets
+          damaged. i already did the “look, the system remembers your touch”
+          idea. for A2, i wanted the trace to feel less digital and more
+          emotional, to stick with the prompt of memory.
+        </p>
+
+        <p>
+          so this one started with a heavier feeling. what if opening a digital
+          object felt like opening something you had been avoiding?
+        </p>
+
+        <p>
+          the suitcase came from that. it felt like the right container because
+          a suitcase already feels half-practical and half-sad. people pack
+          things to leave, to move, to keep, to hide. it already has memory
+          built into it.
+        </p>
+
+        <p>
+          i knew the feeling i wanted before i fully knew how to build it, which
+          was exactly where the problems started.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A2_BUTTON">
+      <article class="text-file">
+        <h2>01_it_was_about_a_button_somehow.txt</h2>
+
+        <p>
+          the funny thing is that this whole project slowly started orbiting
+          around a tiny red button.
+        </p>
+
+        <p>
+          at first, that felt almost too small. like, really? the emotional
+          centre of the work is a button? but that was also why i liked it.
+          grief does not always attach itself to dramatic objects or events.
+          sometimes it chooses the most random, ordinary thing and then suddenly
+          that thing becomes impossible to treat normally.
+        </p>
+
+        <p>
+          i did not want the object to scream “symbolism.” i wanted it to sit
+          there quietly and make the user work their way toward it.
+        </p>
+
+        <p>
+          the button became important because it was easy to miss. the user has
+          to move other things, follow the thread, read the slow build-up, and
+          only then realise that the smallest thing has been pulling everything
+          toward it.
+        </p>
+
+        <p>
+          that felt more honest to me than making one big obvious grief object.
+          the smallness made it worse, in a good way.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A2_DRAG">
+      <article class="text-file">
+        <h2>02_dragging_was_personal_beef.txt</h2>
+
+        <p>i genuinely underestimated how annoying dragging would be.</p>
+
+        <p>
+          in my head, the user would pull objects out of the suitcase and it
+          would feel slow, careful, and kind of painful. then i built it and it
+          felt like moving stickers around. very tragic. zero emotional damage.
+        </p>
+
+        <p>
+          so i kept changing the movement. more resistance. less resistance.
+          slower return. heavier jacket. lighter small objects. different
+          dragging speeds. every small adjustment changed the mood, and most of
+          the time it changed it into something slightly worse before it got
+          better.
+        </p>
+
+        <p>
+          the hardest part was that the drag still had to be usable. if it was
+          too heavy, people might think it was broken. if it was too smooth, it
+          felt meaningless. i had to find the middle point where it still works,
+          but it works with effort.
+        </p>
+
+        <p>
+          that was probably the most useful struggle of the project. it made me
+          realise that interaction has texture. a drag is not just a drag. it
+          can feel light, resistant, reluctant, clean, wrong, heavy, or too
+          easy.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A2_SYSTEM">
+      <article class="text-file">
+        <h2>03_thread_poem_sound_all_fighting.txt</h2>
+
+        <p>
+          this project had a lot of parts that did not immediately want to be
+          friends.
+        </p>
+
+        <p>
+          there was the suitcase. the objects. the red thread. the poem. the
+          button. the sound. individually they made sense, but together they
+          kept feeling slightly off until i understood what each one was
+          supposed to carry.
+        </p>
+
+        <p>
+          the red thread helped the most visually. without it, the user was just
+          dragging things away. with it, every movement looked like it was still
+          attached to the suitcase, which made the interaction feel less free
+          and more guilty.
+        </p>
+
+        <p>
+          the poem also had to behave like part of the system, not simply
+          decoration. using the snowball structure helped because the writing
+          slowly grows as the user keeps pulling things out. it feels like the
+          sentence is being dragged out with the objects instead of sitting
+          beside them.
+        </p>
+
+        <p>
+          sound was the last layer that made it feel more sealed in. muffled
+          audio, low tones, and the sense of something sitting inside the
+          suitcase made the space feel less empty. when the button appears, the
+          sound opens slightly, like the work finally lets out something it had
+          been holding.
+        </p>
+
+        <p>
+          once those parts started working together, the project started feeling
+          like one action: pulling something out while it keeps pulling back.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A2_KEY">
+      <article class="text-file">
+        <h2>04_the_word_it_left.key</h2>
+
+        <p>Trace & Tether changed what “minimal” meant to me again.</p>
+
+        <p>
+          after THE GHOST, i already understood that a simple screen could still
+          hold consequence. but A2 made that more emotional, more nostalgic. the
+          work did not need a huge scene or a full backstory. it needed a
+          suitcase, a thread, a button, and the right amount of resistance.
+        </p>
+
+        <p>
+          i think this project taught me that small interactions can carry a lot
+          if they are tuned properly. the user is not just clicking through
+          meaning. they are physically pulling it out, waiting for it, feeling
+          it resist, and watching it stay attached.
+        </p>
+
+        <p>
+          it also made me more aware of how easy it is for emotional work to
+          become too obvious. if i explain everything, it becomes flat. if i
+          hide everything, it becomes confusing. the piece had to sit somewhere
+          in the middle, where the user feels the weight before the work fully
+          names it.
+        </p>
+
+        <p>
+          the second word this laptop keeps is the thing that stops memory from
+          becoming loose.
+        </p>
+
+        <p class="key-found">KEY FOUND: TETHER</p>
+      </article>
+    </template>
+
+    <template id="file-A2_NEXT">
+      <article class="text-file">
+        <h2>05_next.txt</h2>
+
+        <p>use the key to open A3_BUILD_A_FEAR.</p>
+
+        <p>
+          the next project moves away from memory and into suspicion. less
+          suitcase, more “why do i suddenly not trust this harmless object?”
+        </p>
+      </article>
+    </template>
+
+    <!-- A3 FOLDER CONTENT -->
+    <template id="folder-A3_BUILD_A_FEAR">
+      <button class="file-item" data-type="txt" data-file="A3_START">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>00_after_trace.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A3_DOORS">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>01_the_two_doors_version.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A3_TEDDY">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>02_why_it_became_a_teddy.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A3_FEEDBACK">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>03_feedback_i_needed.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A3_UNSATISFIED">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>04_why_im_still_not_satisfied.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A3_NEXT_TIME">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>05_what_i_would_fix_next.txt</span>
+      </button>
+
+      <button class="file-item" data-type="key" data-file="A3_KEY">
+        <img src="assets/icons/key-file.png" alt="" />
+        <span>06_the_word_it_left.key</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="BUILD_A_FEAR"
+        data-src="works/build-a-fear/index.html"
+      >
+        <img src="assets/icons/exe-file.png" alt="" />
+        <span>RUN_BUILD_A_FEAR.exe</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="A3_NEXT">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>07_next.txt</span>
+      </button>
+    </template>
+
+    <template id="file-A3_START">
+      <article class="text-file">
+        <h2>00_after_trace.txt</h2>
+
+        <p>
+          after Trace & Tether, i wanted the next work to move from memory into
+          psychology. A2 was about pulling something emotional out of an object.
+          A3 was supposed to be about how fear gets placed onto something before
+          we even have proof.
+        </p>
+
+        <p>
+          the main idea was always that fear is not just discovered. it is
+          built. the user sees a cue, reads the situation, fills in the missing
+          danger, and then starts acting like the danger is already real.
+        </p>
+
+        <p>
+          but the final teddy version was not where the project started. at
+          first, i spent a lot of time building a two doors path.
+        </p>
+
+        <p>
+          that version had the user choose between doors, with one side feeling
+          safe and the other feeling unknown. i was interested in how quickly
+          people attach fear to the option that gives them less information.
+        </p>
+
+        <p>
+          i eventually moved away from it, but that door version still shaped
+          the final work. it made me realise the project was not really about
+          the object. it was about the user reading a situation and deciding
+          what feels dangerous.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_DOORS">
+      <article class="text-file">
+        <h2>01_the_two_doors_version.txt</h2>
+
+        <p>
+          the first serious version of Build-A-Fear was built around two doors.
+        </p>
+
+        <p>
+          i spent a lot of time on that path because it felt conceptually clear:
+          put the user in front of two choices, make one feel more familiar and
+          the other more uncertain, then watch how quickly fear attaches itself
+          to the unknown one.
+        </p>
+
+        <p>
+          the idea was that nothing truly dangerous had to be shown. the fear
+          would come from suggestion: a darker door, stranger sound, slower
+          response, maybe a small warning that does not explain itself properly.
+        </p>
+
+        <p>
+          for a while, i thought the two doors structure would be the final
+          work. it had a clean metaphor, and it matched the idea of fear as a
+          decision the user makes before they have enough information.
+        </p>
+
+        <p>
+          but after working on it, it started feeling too direct. the doors made
+          the concept obvious too quickly: safe path versus scary path. it was
+          readable, but maybe too readable. the user could understand the
+          metaphor before they actually felt it.
+        </p>
+
+        <p>
+          that became the problem. i was trying to make a persuasive experience,
+          but the structure was already explaining the argument for me.
+        </p>
+
+        <p>
+          even though i did not keep the two doors as the final version, i do
+          not think that time was wasted. it helped me understand what i wanted
+          to avoid: a version where the user simply recognises the theme instead
+          of becoming part of it.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_TEDDY">
+      <article class="text-file">
+        <h2>02_why_it_became_a_teddy.txt</h2>
+
+        <p>
+          moving from doors to a teddy bear made the project less symbolic and
+          more specific.
+        </p>
+
+        <p>
+          the doors were easy to read because doors already carry the idea of
+          choice, danger, and the unknown. the teddy was harder because it was
+          not naturally threatening. that made it more useful.
+        </p>
+
+        <p>
+          a teddy bear is supposed to be safe. soft. familiar. almost too
+          harmless. so if the user starts feeling uneasy around it, that unease
+          has to come from the framing, not from the object alone.
+        </p>
+
+        <p>
+          that is why the final work became more about inspecting the teddy: the
+          donation box, the room, the small marks, the sounds, the pauses, the
+          feeling that the user is slowly giving the object a darker meaning.
+        </p>
+
+        <p>
+          but this also made the project harder. the teddy needed to stay
+          ordinary enough for the idea to work, but not so ordinary that the
+          experience felt flat.
+        </p>
+
+        <p>
+          i think this is where the project became more interesting, but also
+          more unstable. the two doors version was clearer. the teddy version
+          had more potential, but it needed much more subtlety to fully work.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_FEEDBACK">
+      <article class="text-file">
+        <h2>03_feedback_i_needed.txt</h2>
+
+        <p>the feedback session made the main problem harder to ignore.</p>
+
+        <p>
+          people understood the interface and noticed the sound, but the work
+          still felt like it was explaining its own idea too much. it was almost
+          like i did not trust the interaction enough, so i kept adding text to
+          make sure the user understood the concept.
+        </p>
+
+        <p>
+          this probably came from the earlier two doors version too. that
+          version was very readable, so when i moved into the teddy version, i
+          still had the habit of making the idea too clear too early.
+        </p>
+
+        <p>
+          the feedback was useful because it showed me that clarity is not
+          always the same as persuasion. the user can understand what the work
+          is saying and still not feel it.
+        </p>
+
+        <p>
+          after that, i cut down some explanation and tried to push the mood
+          more through sound, pacing, and visual cues. it improved, but i still
+          think the final work sits somewhere between showing and telling.
+        </p>
+
+        <p>
+          it gets closer to the idea than the door version did, but it still
+          does not fully disappear into the experience the way i wanted it to.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_UNSATISFIED">
+      <article class="text-file">
+        <h2>04_why_im_still_not_satisfied.txt</h2>
+
+        <p>this is probably the project i feel most unresolved about.</p>
+
+        <p>
+          not because it failed completely, but because i can still feel the gap
+          between the concept and the final experience.
+        </p>
+
+        <p>
+          the two doors version was too obvious. the teddy version was more
+          interesting, but it still carries some of that same issue. it
+          sometimes points at the meaning instead of letting the user arrive
+          there on their own.
+        </p>
+
+        <p>
+          the concept wants the user to build fear before they can explain why.
+          the current version still has moments where the work basically says,
+          “look, this is how fear is being made.”
+        </p>
+
+        <p>
+          some parts are working. the teddy is ordinary enough to become
+          suspicious. the sound helps. the step-by-step interaction gives the
+          user a role in changing the mood.
+        </p>
+
+        <p>
+          but i still think it needs more trust in silence, uncertainty, and
+          delayed meaning. showing would mean the user catches themselves
+          suspecting the teddy before the work names that suspicion.
+        </p>
+
+        <p>
+          right now, the mechanism is still a little too visible. i can see the
+          idea working, but i can also see the project explaining the idea while
+          it works.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT_TIME">
+      <article class="text-file">
+        <h2>05_what_i_would_fix_next.txt</h2>
+
+        <p>
+          if i had more time, i would probably return to what the two doors
+          version taught me, but make it less literal.
+        </p>
+
+        <p>
+          i would keep the feeling of choice and uncertainty, but hide it inside
+          the teddy interaction instead of presenting it as two obvious paths.
+        </p>
+
+        <p>
+          maybe the user would not be told what to inspect first. maybe they
+          would find small details in different orders, and each order would
+          slightly change how the teddy feels. the fear would come from their
+          own pattern of attention, not from a fixed instruction path.
+        </p>
+
+        <p>
+          i would also remove more text. not all of it, but the parts that make
+          the concept too neat. i want the work to feel less like it is
+          explaining fear and more like it is quietly training the user to
+          become suspicious.
+        </p>
+
+        <p>
+          the ending would also be calmer. no big statement. maybe the user
+          returns to the teddy and nothing has obviously changed, but it feels
+          different because their reading has changed.
+        </p>
+
+        <p>
+          that is the version i wish i reached: not a scary teddy, and not two
+          doors labelled safe and unsafe, but a situation where the user slowly
+          realises they have been choosing fear the whole time.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_KEY">
+      <article class="text-file">
+        <h2>06_the_word_it_left.key</h2>
+
+        <p>
+          Build-A-Fear taught me that a strong concept does not automatically
+          become a strong experience.
+        </p>
+
+        <p>
+          the two doors version helped me understand the structure of fear: safe
+          versus unknown, familiar versus uncertain, information versus
+          imagination. but it also showed me how quickly a metaphor can become
+          too obvious.
+        </p>
+
+        <p>
+          the teddy version was my attempt to make that idea more subtle.
+          instead of choosing a scary path, the user would slowly place fear
+          onto something that should have been harmless.
+        </p>
+
+        <p>
+          i still think that shift was right, but i do not think i fully solved
+          it. the final version is closer to the feeling i wanted, but it still
+          explains itself more than it should.
+        </p>
+
+        <p>
+          that became the most important lesson from this project: persuasion is
+          not just about making the idea clear. sometimes clarity arrives too
+          early and kills the feeling.
+        </p>
+
+        <p>
+          the user should not be told to suspect. they should catch themselves
+          doing it.
+        </p>
+
+        <p>
+          the final word this laptop keeps is the feeling that starts forming
+          before there is proof.
+        </p>
+
+        <p class="key-found">KEY FOUND: SUSPICION</p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT">
+      <article class="text-file">
+        <h2>07_next.txt</h2>
+
+        <p>use the key to unlock FINAL_SYSTEM_REPORT.</p>
+
+        <p>
+          the last folder looks at the three projects together, including the
+          parts that worked, the parts that almost worked, and the parts i would
+          still rebuild if the semester gave me one more week.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_START">
+      <article class="text-file">
+        <h2>00_after_trace.txt</h2>
+
+        <p>
+          after Trace & Tether, i wanted the next work to move from memory into
+          psychology. A2 was about pulling something emotional out of an object.
+          A3 was supposed to be about how fear gets placed onto something before
+          we even have proof.
+        </p>
+
+        <p>
+          the main idea was always that fear is not just discovered. it is
+          built. the user sees a cue, reads the situation, fills in the missing
+          danger, and then starts acting like the danger is already real.
+        </p>
+
+        <p>
+          but the final teddy version was not where the project started. at
+          first, i spent a lot of time building a two doors path.
+        </p>
+
+        <p>
+          that version had the user choose between doors, with one side feeling
+          safe and the other feeling unknown. i was interested in how quickly
+          people attach fear to the option that gives them less information.
+        </p>
+
+        <p>
+          i eventually moved away from it, but that door version still shaped
+          the final work. it made me realise the project was not really about
+          the object. it was about the user reading a situation and deciding
+          what feels dangerous.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_DOORS">
+      <article class="text-file">
+        <h2>01_the_two_doors_version.txt</h2>
+
+        <p>
+          the first serious version of Build-A-Fear was built around two doors.
+        </p>
+
+        <p>
+          i spent a lot of time on that path because it felt conceptually clear:
+          put the user in front of two choices, make one feel more familiar and
+          the other more uncertain, then watch how quickly fear attaches itself
+          to the unknown one.
+        </p>
+
+        <p>
+          the idea was that nothing truly dangerous had to be shown. the fear
+          would come from suggestion: a darker door, stranger sound, slower
+          response, maybe a small warning that does not explain itself properly.
+        </p>
+
+        <p>
+          for a while, i thought the two doors structure would be the final
+          work. it had a clean metaphor, and it matched the idea of fear as a
+          decision the user makes before they have enough information.
+        </p>
+
+        <p>
+          but after working on it, it started feeling too direct. the doors made
+          the concept obvious too quickly: safe path versus scary path. it was
+          readable, but maybe too readable. the user could understand the
+          metaphor before they actually felt it.
+        </p>
+
+        <p>
+          that became the problem. i was trying to make a persuasive experience,
+          but the structure was already explaining the argument for me.
+        </p>
+
+        <p>
+          even though i did not keep the two doors as the final version, i do
+          not think that time was wasted. it helped me understand what i wanted
+          to avoid: a version where the user simply recognises the theme instead
+          of becoming part of it.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_TEDDY">
+      <article class="text-file">
+        <h2>02_why_it_became_a_teddy.txt</h2>
+
+        <p>
+          moving from doors to a teddy bear made the project less symbolic and
+          more specific.
+        </p>
+
+        <p>
+          the doors were easy to read because doors already carry the idea of
+          choice, danger, and the unknown. the teddy was harder because it was
+          not naturally threatening. that made it more useful.
+        </p>
+
+        <p>
+          a teddy bear is supposed to be safe. soft. familiar. almost too
+          harmless. so if the user starts feeling uneasy around it, that unease
+          has to come from the framing, not from the object alone.
+        </p>
+
+        <p>
+          that is why the final work became more about inspecting the teddy: the
+          donation box, the room, the small marks, the sounds, the pauses, the
+          feeling that the user is slowly giving the object a darker meaning.
+        </p>
+
+        <p>
+          but this also made the project harder. the teddy needed to stay
+          ordinary enough for the idea to work, but not so ordinary that the
+          experience felt flat.
+        </p>
+
+        <p>
+          i think this is where the project became more interesting, but also
+          more unstable. the two doors version was clearer. the teddy version
+          had more potential, but it needed much more subtlety to fully work.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_FEEDBACK">
+      <article class="text-file">
+        <h2>03_feedback_i_needed.txt</h2>
+
+        <p>the feedback session made the main problem harder to ignore.</p>
+
+        <p>
+          people understood the interface and noticed the sound, but the work
+          still felt like it was explaining its own idea too much. it was almost
+          like i did not trust the interaction enough, so i kept adding text to
+          make sure the user understood the concept.
+        </p>
+
+        <p>
+          this probably came from the earlier two doors version too. that
+          version was very readable, so when i moved into the teddy version, i
+          still had the habit of making the idea too clear too early.
+        </p>
+
+        <p>
+          the feedback was useful because it showed me that clarity is not
+          always the same as persuasion. the user can understand what the work
+          is saying and still not feel it.
+        </p>
+
+        <p>
+          after that, i cut down some explanation and tried to push the mood
+          more through sound, pacing, and visual cues. it improved, but i still
+          think the final work sits somewhere between showing and telling.
+        </p>
+
+        <p>
+          it gets closer to the idea than the door version did, but it still
+          does not fully disappear into the experience the way i wanted it to.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_UNSATISFIED">
+      <article class="text-file">
+        <h2>04_why_im_still_not_satisfied.txt</h2>
+
+        <p>this is probably the project i feel most unresolved about.</p>
+
+        <p>
+          not because it failed completely, but because i can still feel the gap
+          between the concept and the final experience.
+        </p>
+
+        <p>
+          the two doors version was too obvious. the teddy version was more
+          interesting, but it still carries some of that same issue. it
+          sometimes points at the meaning instead of letting the user arrive
+          there on their own.
+        </p>
+
+        <p>
+          the concept wants the user to build fear before they can explain why.
+          the current version still has moments where the work basically says,
+          “look, this is how fear is being made.”
+        </p>
+
+        <p>
+          some parts are working. the teddy is ordinary enough to become
+          suspicious. the sound helps. the step-by-step interaction gives the
+          user a role in changing the mood.
+        </p>
+
+        <p>
+          but i still think it needs more trust in silence, uncertainty, and
+          delayed meaning. showing would mean the user catches themselves
+          suspecting the teddy before the work names that suspicion.
+        </p>
+
+        <p>
+          right now, the mechanism is still a little too visible. i can see the
+          idea working, but i can also see the project explaining the idea while
+          it works.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT_TIME">
+      <article class="text-file">
+        <h2>05_what_i_would_fix_next.txt</h2>
+
+        <p>
+          if i had more time, i would probably return to what the two doors
+          version taught me, but make it less literal.
+        </p>
+
+        <p>
+          i would keep the feeling of choice and uncertainty, but hide it inside
+          the teddy interaction instead of presenting it as two obvious paths.
+        </p>
+
+        <p>
+          maybe the user would not be told what to inspect first. maybe they
+          would find small details in different orders, and each order would
+          slightly change how the teddy feels. the fear would come from their
+          own pattern of attention, not from a fixed instruction path.
+        </p>
+
+        <p>
+          i would also remove more text. not all of it, but the parts that make
+          the concept too neat. i want the work to feel less like it is
+          explaining fear and more like it is quietly training the user to
+          become suspicious.
+        </p>
+
+        <p>
+          the ending would also be calmer. no big statement. maybe the user
+          returns to the teddy and nothing has obviously changed, but it feels
+          different because their reading has changed.
+        </p>
+
+        <p>
+          that is the version i wish i reached: not a scary teddy, and not two
+          doors labelled safe and unsafe, but a situation where the user slowly
+          realises they have been choosing fear the whole time.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_KEY">
+      <article class="text-file">
+        <h2>06_the_word_it_left.key</h2>
+
+        <p>
+          Build-A-Fear taught me that a strong concept does not automatically
+          become a strong experience.
+        </p>
+
+        <p>
+          the two doors version helped me understand the structure of fear: safe
+          versus unknown, familiar versus uncertain, information versus
+          imagination. but it also showed me how quickly a metaphor can become
+          too obvious.
+        </p>
+
+        <p>
+          the teddy version was my attempt to make that idea more subtle.
+          instead of choosing a scary path, the user would slowly place fear
+          onto something that should have been harmless.
+        </p>
+
+        <p>
+          i still think that shift was right, but i do not think i fully solved
+          it. the final version is closer to the feeling i wanted, but it still
+          explains itself more than it should.
+        </p>
+
+        <p>
+          that became the most important lesson from this project: persuasion is
+          not just about making the idea clear. sometimes clarity arrives too
+          early and kills the feeling.
+        </p>
+
+        <p>
+          the user should not be told to suspect. they should catch themselves
+          doing it.
+        </p>
+
+        <p>
+          the final word this laptop keeps is the feeling that starts forming
+          before there is proof.
+        </p>
+
+        <p class="key-found">KEY FOUND: SUSPICION</p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT">
+      <article class="text-file">
+        <h2>07_next.txt</h2>
+
+        <p>use the key to unlock FINAL_SYSTEM_REPORT.</p>
+
+        <p>
+          the last folder looks at the three projects together, including the
+          parts that worked, the parts that almost worked, and the parts i would
+          still rebuild if the semester gave me one more week.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_START">
+      <article class="text-file">
+        <h2>00_after_trace.txt</h2>
+
+        <p>
+          after Trace & Tether, i wanted to move from memory into something more
+          psychological.
+        </p>
+
+        <p>
+          A2 was about pulling something emotional out of an object. A3 was
+          supposed to be about putting fear into an object that was not actually
+          dangerous.
+        </p>
+
+        <p>
+          the idea was interesting to me because fear is not always in the thing
+          itself. sometimes it is in the lighting, the timing, the sound, the
+          way a space frames something ordinary until it starts feeling wrong.
+        </p>
+
+        <p>
+          so Build-A-Fear became my attempt to make the user construct fear
+          around a teddy bear. not because the teddy is naturally scary, but
+          because the system slowly teaches the user to suspect it.
+        </p>
+
+        <p>i still like that idea. i just do not think i fully solved it.</p>
+      </article>
+    </template>
+
+    <template id="file-A3_TEDDY">
+      <article class="text-file">
+        <h2>01_the_teddy_problem.txt</h2>
+
+        <p>the teddy was useful because it was too safe.</p>
+
+        <p>
+          if i started with something already creepy, the work would not really
+          have to persuade anyone. the user would just see a horror object and
+          understand the genre immediately.
+        </p>
+
+        <p>
+          i wanted the fear to arrive through context instead: the donation box,
+          the dark room, the marks on the teddy, the sounds, the pauses, the
+          sense that the user is inspecting something they should maybe leave
+          alone.
+        </p>
+
+        <p>
+          the problem is that this is a really thin line. if the teddy stays too
+          normal, the work feels flat. if it becomes too obviously scary, the
+          concept becomes too easy.
+        </p>
+
+        <p>
+          i spent a lot of the project trying to find that middle point, and i
+          am still not sure i fully found it.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_FEEDBACK">
+      <article class="text-file">
+        <h2>02_feedback_i_needed.txt</h2>
+
+        <p>the feedback session made the problem clearer.</p>
+
+        <p>
+          people understood the interface and noticed the sound, but the work
+          still felt like it was explaining its own idea too much. it was almost
+          like i did not trust the interaction to carry the concept, so i kept
+          adding text to make sure the user understood.
+        </p>
+
+        <p>
+          that was useful feedback, but also frustrating, because the whole
+          point of the project was supposed to be “fear is constructed.” if i
+          have to keep telling the user that, then the system is not fully doing
+          its job yet.
+        </p>
+
+        <p>
+          i cut down some explanation and pushed the mood more through sound,
+          pacing, and visual cues. it improved, but i still think the final work
+          sits between showing and telling.
+        </p>
+
+        <p>
+          it gets closer to the idea, but it does not completely disappear into
+          the experience the way i wanted it to.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_UNSATISFIED">
+      <article class="text-file">
+        <h2>03_why_im_still_not_satisfied.txt</h2>
+
+        <p>this is probably the project i feel most unfinished about.</p>
+
+        <p>
+          not because it completely failed, but because i can still feel the gap
+          between the concept and the experience. the concept wants the user to
+          build fear without being told. the current version still explains
+          itself too much.
+        </p>
+
+        <p>
+          some parts are working. the teddy is ordinary enough to become
+          suspicious. the sounds help. the step-by-step interaction gives the
+          user a role in changing the mood.
+        </p>
+
+        <p>
+          but i still think the work sometimes points at its meaning instead of
+          letting the meaning appear naturally. it says “look, fear is being
+          made” when i wanted it to quietly make the user feel that before they
+          could name it.
+        </p>
+
+        <p>
+          that difference matters. showing would mean the user only realises
+          their own suspicion after they have already participated in it.
+          telling means the project announces the argument too early.
+        </p>
+
+        <p>
+          i think Build-A-Fear is close, but not invisible enough yet. the
+          mechanism is still showing through the skin.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT_TIME">
+      <article class="text-file">
+        <h2>04_what_i_would_fix_next.txt</h2>
+
+        <p>if i had more time, i would make the work quieter.</p>
+
+        <p>
+          not visually quieter necessarily, but conceptually quieter. less
+          written explanation, fewer direct clues, fewer moments where the
+          project tells the user what kind of reading it wants.
+        </p>
+
+        <p>
+          i would make the interaction feel more like investigation than
+          instruction. maybe the user would move objects around, notice small
+          inconsistencies, replay sounds, or find details that do not
+          immediately explain themselves.
+        </p>
+
+        <p>
+          i would also let the teddy stay normal for longer. the fear should
+          arrive slowly enough that the user feels partly responsible for
+          imagining it.
+        </p>
+
+        <p>
+          the ending would also change. instead of making the point directly, i
+          would let the final screen feel almost too calm. maybe the user
+          returns to the teddy and nothing jumps out, but everything now feels
+          different because of what they have already done.
+        </p>
+
+        <p>
+          that is the version i wish i reached: not a horror reveal, but a quiet
+          moment where the user realises the object did not change as much as
+          their reading of it did.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_KEY">
+      <article class="text-file">
+        <h2>05_the_word_it_left.key</h2>
+
+        <p>
+          Build-A-Fear taught me something slightly uncomfortable: having a
+          strong concept does not mean the experience automatically proves it.
+        </p>
+
+        <p>
+          THE GHOST felt clearer because the user could immediately see the scar
+          they left. Trace & Tether felt clearer because the pull, weight, and
+          thread were physically tied to the emotion.
+        </p>
+
+        <p>
+          Build-A-Fear was harder because suspicion is less visible. it happens
+          in the user before it happens on the screen. that made the project
+          more fragile, because one extra sentence or one obvious cue could
+          flatten the whole thing.
+        </p>
+
+        <p>
+          i still think the work is important in the semester because it showed
+          me the limit of explaining. it made me realise that persuasion is
+          strongest when the system creates the feeling before the text names
+          it.
+        </p>
+
+        <p>
+          so even though i am not fully satisfied with the final result, the
+          project left me with the clearest lesson: the user should not be told
+          to suspect. they should catch themselves suspecting.
+        </p>
+
+        <p>
+          the final word this laptop keeps is the feeling that starts forming
+          before there is proof.
+        </p>
+
+        <p class="key-found">KEY FOUND: SUSPICION</p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT">
+      <article class="text-file">
+        <h2>06_next.txt</h2>
+
+        <p>use the key to unlock FINAL_SYSTEM_REPORT.</p>
+
+        <p>
+          the last folder looks at the three projects together, including the
+          parts that worked and the parts that still feel unresolved.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_START">
+      <article class="text-file">
+        <h2>00_after_trace.txt</h2>
+
+        <p>
+          after Trace & Tether, i became interested in what the user adds in
+          their own head.
+        </p>
+
+        <p>
+          A2 was about pulling memory out. A3 became about putting suspicion in.
+          the difference is small, but it changed the whole structure of the
+          work.
+        </p>
+
+        <p>
+          Build-A-Fear started with a teddy bear because it was not naturally
+          threatening. that was the useful part. if the teddy already looked
+          scary, the project would be too easy.
+        </p>
+
+        <p>
+          i wanted the user to slowly become responsible for the fear. not by
+          being told “this is scary,” but by adding enough context that their
+          own brain starts filling in the threat.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_TEDDY">
+      <article class="text-file">
+        <h2>01_the_teddy_was_too_safe.txt</h2>
+
+        <p>
+          the first problem was that the teddy was doing its job too well. it
+          looked soft. familiar. a bit sad maybe, but not suspicious enough.
+        </p>
+
+        <p>
+          making it obviously monstrous felt wrong too. that made the work less
+          about fear being constructed and more about “look, creepy teddy.”
+        </p>
+
+        <p>
+          so the fear had to come from everything around it: the dim room, the
+          donation box, the waiting, the audio, the marks, the feeling that the
+          user is inspecting something they should maybe leave alone.
+        </p>
+
+        <p>
+          the teddy itself stayed ordinary enough that the user had room to
+          doubt themselves. that doubt became useful.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_FEEDBACK">
+      <article class="text-file">
+        <h2>02_feedback_i_needed.txt</h2>
+
+        <p>
+          the feedback session basically told me the work was not scary enough.
+          which was annoying, because i knew. but hearing it from other people
+          made it harder to ignore.
+        </p>
+
+        <p>
+          people liked the sound and the interface, but the experience still had
+          too much explanation sitting on top of it. i was trying to make fear
+          feel constructed, then immediately explaining the construction like i
+          did not trust the user to understand it.
+        </p>
+
+        <p>
+          after that, i cut the text down. the project got better when i stopped
+          protecting the idea so much.
+        </p>
+
+        <p>
+          that was painful in a tiny design-student way, because cutting text
+          means deleting work. but it also made the piece less desperate to be
+          understood, and more confident as an experience.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_SCARY">
+      <article class="text-file">
+        <h2>03_scary_is_annoying.txt</h2>
+
+        <p>
+          making something scary without making it cringe is genuinely
+          difficult.
+        </p>
+
+        <p>
+          one version was too quiet and nothing happened. one version was too
+          dramatic and felt cheap. sometimes the sound was the problem.
+          sometimes the timing was the problem. sometimes the teddy just sat
+          there looking innocent while i was begging it to be unsettling.
+        </p>
+
+        <p>
+          i had to keep adjusting the pacing. when does the user get the next
+          cue? how long should the pause be? how much should the sound move?
+          when does a small change become noticeable without becoming silly?
+        </p>
+
+        <p>
+          eventually i stopped trying to make the teddy terrifying and focused
+          on making the user hesitate. hesitation was the better target.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_FINAL">
+      <article class="text-file">
+        <h2>04_when_it_finally_worked.txt</h2>
+
+        <p>
+          the final version worked better when it behaved like a sequence of
+          suspicion.
+        </p>
+
+        <p>
+          each action adds a cue: light, shadow, tear, heartbeat, recording,
+          final reveal. not everything happens at once. the user has to build
+          the mood by continuing.
+        </p>
+
+        <p>
+          sound became the thing that held the tension together. some sounds sit
+          underneath the space, some feel close, and some move slightly so the
+          user cannot place them comfortably.
+        </p>
+
+        <p>
+          the ending became a question instead of a statement. that mattered.
+          the work should not say “you made the fear.” it should leave the user
+          sitting with the realisation that maybe they did.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-A3_KEY">
+      <article class="text-file">
+        <h2>05_the_word_it_left.key</h2>
+
+        <p>Build-A-Fear brought the semester together for me.</p>
+
+        <p>
+          THE GHOST used interaction as a mark. Trace & Tether used it as
+          weight. Build-A-Fear used it as persuasion.
+        </p>
+
+        <p>
+          the teddy does not become scary because the work announces it. it
+          becomes scary because the user keeps accepting the cues. they click,
+          listen, wait, inspect, and slowly start believing there is something
+          wrong.
+        </p>
+
+        <p>
+          the hardest part was trusting the experience enough to stop explaining
+          it. the strongest version happened when the system carried the
+          argument instead of the text.
+        </p>
+
+        <p>
+          the final word this laptop keeps is the thing the user builds before
+          they can prove it.
+        </p>
+
+        <p class="key-found">KEY FOUND: SUSPICION</p>
+      </article>
+    </template>
+
+    <template id="file-A3_NEXT">
+      <article class="text-file">
+        <h2>06_next.txt</h2>
+
+        <p>use the key to unlock FINAL_SYSTEM_REPORT.</p>
+
+        <p>
+          the last folder is not really about one project anymore. it is about
+          the pattern they made together.
+        </p>
+      </article>
+    </template>
+
+    <!-- FINAL SYSTEM REPORT -->
+    <template id="folder-FINAL_SYSTEM_REPORT">
+      <button class="file-item" data-type="txt" data-file="FINAL_NOTE">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>00_before_reading.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="FINAL_SHIFT">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>01_the_real_shift.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="FINAL_ANNOYING">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>02_the_annoying_part.txt</span>
+      </button>
+
+      <button class="file-item" data-type="txt" data-file="FINAL_REFLECTION">
+        <img src="assets/icons/key-file.png" alt="" />
+        <span>03_final_reflection.txt</span>
+      </button>
+    </template>
+
+    <template id="file-FINAL_NOTE">
+      <article class="text-file">
+        <h2>00_before_reading.txt</h2>
+
+        <p>
+          this folder is the closest thing to a final reflection, but i do not
+          want it to sound like i had a beautiful clear plan from week one.
+        </p>
+
+        <p>i did not.</p>
+
+        <p>
+          most of the semester was me making something, realising the feeling
+          was wrong, changing the system, then finding a better explanation
+          afterwards. the work often understood itself before i did.
+        </p>
+
+        <p>
+          the documentation PDFs show the formal process. this folder is more
+          about what actually shifted in my thinking after living with the
+          projects for too long.
+        </p>
+
+        <p class="system-line">this is the less-polished truth folder.</p>
+      </article>
+    </template>
+
+    <template id="file-FINAL_SHIFT">
+      <article class="text-file">
+        <h2>01_the_real_shift.txt</h2>
+
+        <p>the real shift was that i stopped treating minimalism as a look.</p>
+
+        <p>
+          at the start, “minimal” still meant clean to me. less colour, less
+          text, less visual noise. but that is not enough. a plain screen can
+          still be empty in a bad way. a simple interaction can still feel
+          pointless.
+        </p>
+
+        <p>
+          each project pushed minimalism into a different kind of pressure. THE
+          GHOST made the empty grid sensitive. Trace & Tether made a small
+          button emotionally heavy. Build-A-Fear made tiny cues feel suspicious.
+        </p>
+
+        <p>
+          so the semester became less about removing things and more about
+          choosing what the user has to notice.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-FINAL_ANNOYING">
+      <article class="text-file">
+        <h2>02_the_annoying_part.txt</h2>
+
+        <p>
+          the most annoying problems were not the loud obvious ones. they were
+          the ones where the work technically functioned but still felt wrong.
+        </p>
+
+        <p>
+          the grid moved, but it did not feel wounded. the suitcase dragged, but
+          it did not feel heavy. the teddy changed, but it did not feel
+          suspicious.
+        </p>
+
+        <p>
+          that kind of problem is harder because there is no single error
+          message for “the emotional logic is off.” i had to keep adjusting
+          timing, resistance, sound, text, pacing, and recovery until the
+          interaction and the idea finally met each other.
+        </p>
+
+        <p>
+          that probably taught me more than the parts that worked immediately. a
+          functioning interaction is not automatically a meaningful one. it has
+          to create the right kind of attention.
+        </p>
+      </article>
+    </template>
+
+    <template id="file-FINAL_REFLECTION">
+      <article class="text-file">
+        <h2>03_final_reflection.txt</h2>
+
+        <p>
+          looking back, this semester changed the way i understand minimalist
+          interactive design. i used to connect minimalism mostly with
+          reduction: fewer elements, cleaner visuals, less clutter. now i
+          understand it more as a way of controlling pressure.
+        </p>
+
+        <p>
+          THE GHOST was the first step in that shift. the work began as a quiet
+          grid, but it only became meaningful when the user could damage it. the
+          important part was not the grid itself. it was the fact that the grid
+          remembered. that project taught me that a simple interface still needs
+          consequence.
+        </p>
+
+        <p>
+          Trace & Tether changed the scale of that idea. instead of showing
+          damage on a system, it asked the user to handle memory through weight,
+          resistance, thread, poem, and sound. the work stayed visually
+          restrained, but the interaction made it feel emotionally fuller. it
+          taught me that small things can carry a lot if the user has to
+          physically work with them.
+        </p>
+
+        <p>
+          Build-A-Fear pushed the same thinking into persuasion, but it also
+          showed me where my work still struggled. the project first lived as a
+          two doors path, where fear came from choosing between the familiar and
+          the unknown. i spent a lot of time on that version, but it eventually
+          felt too direct. the teddy bear version was my attempt to make the
+          same idea more subtle: instead of choosing fear, the user slowly
+          places fear onto something harmless. i got closer to that, but i still
+          feel the final version explains itself more than i wanted. it taught
+          me that showing is not just removing text. the whole system has to
+          trust the user enough to let them arrive there alone.
+        </p>
+        <p>
+          a lot of the semester was frustrating because the problems were often
+          invisible at first. something could work on a technical level and
+          still fail emotionally. i had to learn to pay attention to that
+          difference: not just “does this function?” but “does this function
+          create the feeling the work needs?”
+        </p>
+
+        <p>
+          that is why this housing site is built like a laptop instead of a
+          clean archive. the projects did not arrive as polished final objects.
+          they came from reopening files, renaming versions, fixing broken
+          behaviour, deleting over-explanation, and slowly understanding what
+          each interaction was actually doing.
+        </p>
+
+        <p>
+          the three works now feel connected through the words they leave
+          behind: scar, tether, suspicion. a scar is what remains after contact.
+          a tether is what keeps memory attached. suspicion is what the user
+          builds before there is proof.
+        </p>
+
+        <p>
+          by the end, minimalist interaction became less about showing less and
+          more about leaving the right space for the user to complete the
+          meaning. the work gives enough structure to guide them, but not so
+          much that it thinks for them.
+        </p>
+      </article>
+    </template>
+
+    <!-- DOCUMENTATION PDFS FOLDER -->
+    <template id="folder-DOCUMENTATION_PDFS">
+      <button class="file-item" data-type="txt" data-file="DOCS_NOTE">
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>00_read_me_for_pictures.txt</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="THE_GHOST_DOCUMENTATION"
+        data-src="documentation-pdfs/the-ghost-documentation.pdf"
+      >
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>the-ghost-documentation.pdf</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="TRACE_TETHER_DOCUMENTATION"
+        data-src="documentation-pdfs/trace-tether-documentation.pdf"
+      >
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>trace-tether-documentation.pdf</span>
+      </button>
+
+      <button
+        class="file-item"
+        data-type="exe"
+        data-work="BUILD_A_FEAR_DOCUMENTATION"
+        data-src="documentation-pdfs/build-a-fear-documentation.pdf"
+      >
+        <img src="assets/icons/txt-file.png" alt="" />
+        <span>build-a-fear-documentation.pdf</span>
+      </button>
+    </template>
+
+    <template id="file-DOCS_NOTE">
+      <article class="text-file">
+        <h2>00_read_me_for_pictures.txt</h2>
+
+        <p>this is where the proper screenshots and formal process live.</p>
+
+        <p>
+          i removed the photo dump because it felt fake. i do not naturally keep
+          a neat folder of random screenshots while building. i usually update
+          the file, fix the bug, overwrite the version, and only later remember
+          that i probably should have documented the disaster before it got
+          fixed.
+        </p>
+
+        <p>
+          the PDFs are more useful for that part. they have the actual
+          development images, explanations, references, and process notes for
+          each project.
+        </p>
+
+        <p>
+          the laptop files are for the other layer: the frustration, decisions,
+          mistakes, and the way the projects slowly started making sense.
+        </p>
+
+        <p class="system-line">
+          pictures live here. the messy thinking is everywhere else.
+        </p>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
