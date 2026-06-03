@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #d9c5a3; /* Vintage paper base */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+canvas {
+  /* Fixes SVG/Vector blur during scaling */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+/* Fixes the "Loading..." text from staying on screen */
+#loading-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #8b4513;
+  z-index: -1; /* This moves it behind the canvas once it loads */
+}
